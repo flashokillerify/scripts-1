@@ -45,11 +45,6 @@ sudo DEBIAN_FRONTEND=noninteractive \
     libxml-simple-perl apt-utils gh \
     ${PACKAGES} -y
 
-echo -e "Setting up udev rules for adb!"
-sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L https://raw.githubusercontent.com/M0Rf30/android-udev-rules/master/51-android.rules
-sudo chmod 644 /etc/udev/rules.d/51-android.rules
-sudo chown root /etc/udev/rules.d/51-android.rules
-sudo systemctl restart udev
 
 if [[ "$(command -v make)" ]]; then
     makeversion="$(make -v | head -1 | awk '{print $3}')"
@@ -60,5 +55,4 @@ if [[ "$(command -v make)" ]]; then
 fi
 
 echo "Installing repo"
-sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
-sudo chmod a+rx /usr/local/bin/repo
+apt-get install repo
